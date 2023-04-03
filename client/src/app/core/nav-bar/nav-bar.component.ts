@@ -11,17 +11,15 @@ export class NavBarComponent {
   ngOnInit() {
     this.items = [
       {
-        label: 'Feature',
+        label: 'Home',
       },
       {
-        label: 'Enterprise',
+        label: 'Shop',
       },
       {
-        label: 'Support',
+        label: 'Contact',
       },
-      {
-        label: 'Pricing',
-      },
+
     ];
   }
 }
