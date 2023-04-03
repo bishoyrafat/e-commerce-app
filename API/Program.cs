@@ -17,7 +17,12 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSwaggerDocumentation();
-
+      builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        }));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +43,9 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+                app.UseCors("MyPolicy");
 
 app.MapControllers();
 app.MapFallbackToController("Index", "Fallback");
