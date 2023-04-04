@@ -10,4 +10,10 @@ baseUrl ='https://localhost:5001/api/'
   getAllProducts(){
     return this.http.get(this.baseUrl + 'Products')
   }
+  getAllType(){
+    return this.http.get(this.baseUrl + 'Products/types')
+  }
+  getAllBrands(){
+    return this.http.get(this.baseUrl + 'Products/brands')
+  }
 }
