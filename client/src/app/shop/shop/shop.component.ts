@@ -18,16 +18,16 @@ export class ShopComponent implements OnInit {
   products: Iproducts[] = [];
   types: IType[] = [];
   brands: Ibrand[] = [];
-  cities: City[] = [];
-  selectedCity: any;
-  value3: any;
+  sort: any = [];
+  selectedType: any;
+  selectedBrand: any;
+  selectedSort: any;
+  searchValue: any;
   constructor(private shopService: ShopService) {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
+    this.sort = [
+      { name: 'Alphapetical', code: 'name' },
+      { name: 'Price : High to low', code: 'priceAsc' },
+      { name: 'Price : low to high', code: 'priceDesc' },
     ];
   }
   ngOnInit(): void {
@@ -37,21 +37,42 @@ export class ShopComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.shopService.getAllProducts().subscribe((data: any) => {
-      console.log(data);
-      this.products = data.data;
-    });
+    this.shopService
+      .getAllProducts(this.selectedType, this.selectedBrand, this.selectedSort)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.products = data.data;
+      });
   }
 
   getAllType() {
     this.shopService.getAllType().subscribe((data: any) => {
-      this.types = data;
+      this.types = [{ id: 0, name: 'All' }, ...data];
     });
   }
 
   getAllBrands() {
     this.shopService.getAllBrands().subscribe((data: any) => {
-      this.brands =data;
+      this.brands = [{ id: 0, name: 'All' }, ...data];
     });
+  }
+
+  selectType(type: any) {
+    console.log(type);
+
+    this.selectedType = type;
+    this.getAllProducts();
+  }
+  selectBrand(brand: any) {
+    console.log(brand);
+
+    this.selectedBrand = brand;
+    this.getAllProducts();
+  }
+  selectSort(sort: any) {
+    console.log(sort);
+
+    this.selectedSort = sort.code;
+    this.getAllProducts();
   }
 }

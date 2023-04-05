@@ -1,24 +1,22 @@
-
-
 <div class="row mt-5">
   <div class="col-3">
     <div>Sort</div>
-    <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+    <p-dropdown [options]="sort" [(ngModel)]="selectedSort" optionLabel="name" (onChange)="selectSort(selectedSort)"></p-dropdown>
     <hr>
     <div>Brand</div>
-    <p-listbox [options]="brands" [(ngModel)]="selectedCity" optionLabel="name"></p-listbox>
+    <p-listbox [options]="brands" [(ngModel)]=" selectedBrand" optionLabel="name" (onChange)="selectBrand(selectedBrand)"></p-listbox>
     <hr>
     <div>Type</div>
-    <p-listbox [options]="types" [(ngModel)]="selectedCity" optionLabel="name"></p-listbox>
+    <p-listbox [options]="types" [(ngModel)]="selectedType " optionLabel="name" (onChange)="selectType(selectedType)"></p-listbox>
   </div>
   <div class="col">
     <div class="d-flex justify-content-between align-items-center mb-5">
       <span>Showing <strong>10</strong> of <strong>30</strong> Results</span>
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
-        <input type="text" pInputText placeholder="Search" [(ngModel)]="value3" class="p-inputtext-sm" />
+        <input type="text" pInputText placeholder="Search" [(ngModel)]="searchValue" class="p-inputtext-sm" />
       </span>
-      <span >
+      <span>
         <button pButton pRipple type="button" label="Search" class="p-button-outlined p-button-sm mx-2"></button>
         <button pButton pRipple type="button" label="Reset"
           class="p-button-outlined p-button-danger p-button-sm "></button>
