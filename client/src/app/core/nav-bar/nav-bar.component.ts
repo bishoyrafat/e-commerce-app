@@ -12,14 +12,23 @@ export class NavBarComponent {
     this.items = [
       {
         label: 'Home',
+        routerLink: '/home',
+        routerLinkActiveOptions: { exact: true },
       },
       {
         label: 'Shop',
+        routerLink: '/shop',
+        routerLinkActiveOptions: { exact: true },
       },
       {
-        label: 'Contact',
+        label: 'Errors',
+        routerLink: '/errors',
+        routerLinkActiveOptions: { exact: true },
       },
-
     ];
+  }
+
+  isActiveChange(e: any) {
+    console.log(e);
   }
 }

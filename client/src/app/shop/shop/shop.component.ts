@@ -1,6 +1,6 @@
 import { Ibrand } from './../../shared/models/brand';
 import { IType } from './../../shared/models/productType';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Ipagination } from 'app/shared/models/pagination';
 import { Iproducts } from 'app/shared/models/products';
 import { ShopService } from '../shop.service';
@@ -15,6 +15,7 @@ interface City {
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
+  @ViewChild('searchText') search!:ElementRef
   products: Iproducts[] = [];
   types: IType[] = [];
   brands: Ibrand[] = [];
@@ -23,6 +24,9 @@ export class ShopComponent implements OnInit {
   selectedBrand: any;
   selectedSort: any;
   searchValue: any;
+  pageIndex: number = 1;
+  pageSize: number = 3;
+  pageTotal: number = 0;
   constructor(private shopService: ShopService) {
     this.sort = [
       { name: 'Alphapetical', code: 'name' },
@@ -31,16 +35,20 @@ export class ShopComponent implements OnInit {
     ];
   }
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getAllProducts(this.pageIndex, this.pageSize);
     this.getAllType();
     this.getAllBrands();
   }
 
-  getAllProducts() {
+  getAllProducts(pageIndex: number, pageSize: number) {
     this.shopService
-      .getAllProducts(this.selectedType, this.selectedBrand, this.selectedSort)
+      .getAllProducts(pageIndex, pageSize)
       .subscribe((data: any) => {
+        this.products=[]
         console.log(data);
+        this.pageIndex = data.pageIndex;
+        this.pageSize = data.pageSize;
+        this.pageTotal = data.count;
         this.products = data.data;
       });
   }
@@ -58,21 +66,37 @@ export class ShopComponent implements OnInit {
   }
 
   selectType(type: any) {
-    console.log(type);
-
-    this.selectedType = type;
-    this.getAllProducts();
+    this.getFilyeredType(type.id);
   }
   selectBrand(brand: any) {
-    console.log(brand);
-
-    this.selectedBrand = brand;
-    this.getAllProducts();
+    this.getFilyeredBrand(brand.id);
   }
   selectSort(sort: any) {
     console.log(sort);
+  }
 
-    this.selectedSort = sort.code;
-    this.getAllProducts();
+  getFilyeredBrand(brandId: number) {
+    this.shopService.getFilyeredBrand(brandId).subscribe((i: any) => {
+      this.products = i.data;
+    });
+  }
+  getFilyeredType(typeId: number) {
+    this.shopService.getFilyeredType(typeId).subscribe((i: any) => {
+      this.products = i.data;
+    });
+  }
+  getFilteredSearch(text:string){
+    this.shopService.getFilteredSearch(text,this.pageIndex,this.pageSize).subscribe(()=>{
+      this.getAllProducts(this.pageIndex,this.pageSize)
+
+    })
+  }
+  handlePagination(e:any){
+    this.pageIndex = e.page+1
+    this.getAllProducts(e.page+1, e.rows);
+
+  }
+  searchedText(){
+    this.getFilteredSearch(this.search.nativeElement.value)
   }
 }
