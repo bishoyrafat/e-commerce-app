@@ -8,11 +8,13 @@ import { CardModule } from 'primeng/card';
 import { MenubarModule } from 'primeng/menubar';
 import { TestErrorsComponent } from './test-errors/test-errors.component';
 import {BreadcrumbModule} from 'xng-breadcrumb';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
   declarations: [NavBarComponent, TestErrorsComponent],
   imports: [CommonModule, MenubarModule, CardModule, ButtonModule, BadgeModule,BreadcrumbModule],
+  imports: [CommonModule, MenubarModule, CardModule, ButtonModule, BadgeModule,NgxSpinnerModule],
   exports: [NavBarComponent],
 })
 export class CoreModule {}

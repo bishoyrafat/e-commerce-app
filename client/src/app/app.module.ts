@@ -11,7 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import {BreadcrumbModule} from 'xng-breadcrumb';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,15 +24,24 @@ import {BreadcrumbModule} from 'xng-breadcrumb';
     HttpClientModule,
     ShopModule,
     ToastModule,
-    BreadcrumbModule
+    BreadcrumbModule,
 
+    RouterModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
   ],
   exports:[BreadcrumbModule],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,useClass:HandleErrorsInterceptor,multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
     },
-    MessageService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HandleErrorsInterceptor,
+      multi: true,
+    },
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })
