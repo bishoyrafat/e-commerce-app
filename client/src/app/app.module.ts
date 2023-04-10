@@ -2,7 +2,7 @@ import { RouterModule } from '@angular/router';
 import { HandleErrorsInterceptor } from './core/interceptors/handle-errors.interceptor';
 import { ShopModule } from './shop/shop.module';
 import { CoreModule } from './core/core.module';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,9 +26,8 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     ShopModule,
     ToastModule,
     BreadcrumbModule,
-
     RouterModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    NgxSpinnerModule,
   ],
   exports:[BreadcrumbModule],
   providers: [
@@ -44,5 +44,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     MessageService,
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 })
 export class AppModule {}

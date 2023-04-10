@@ -13,8 +13,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [NavBarComponent, TestErrorsComponent],
-  imports: [CommonModule, MenubarModule, CardModule, ButtonModule, BadgeModule,BreadcrumbModule],
-  imports: [CommonModule, MenubarModule, CardModule, ButtonModule, BadgeModule,NgxSpinnerModule],
+  imports: [CommonModule, MenubarModule, CardModule, ButtonModule, BadgeModule,NgxSpinnerModule,BreadcrumbModule],
   exports: [NavBarComponent],
 })
 export class CoreModule {}

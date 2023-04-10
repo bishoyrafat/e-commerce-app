@@ -11,18 +11,15 @@ import { finalize, Observable, delay } from 'rxjs';
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
   constructor(private spinnerService: SpinnerService) {}
-  i = 0;
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): any {
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     this.spinnerService.showSpinner();
-    this.i++;
-    next.handle(request).pipe(
+    return next.handle(request).pipe(
       delay(1000),
       finalize(() => {
-        this.i--;
-        if(this.i===0){
-         return this.spinnerService.hideSpinner();
-        }
-
+        this.spinnerService.hideSpinner();
       })
     );
   }

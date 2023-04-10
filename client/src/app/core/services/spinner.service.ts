@@ -9,7 +9,6 @@ export class SpinnerService {
   index = 0;
 
   showSpinner() {
-    this.index++;
     this.spinner.show();
   }
 
