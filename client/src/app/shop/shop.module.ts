@@ -6,12 +6,12 @@ import { ShopComponent } from './shop/shop.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { ListboxModule } from 'primeng/listbox';
-import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ShopComponent, ProductItemComponent, ProductDetailsComponent],

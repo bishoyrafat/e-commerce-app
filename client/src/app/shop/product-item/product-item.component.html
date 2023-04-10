@@ -5,7 +5,7 @@
   <h4>{{'$'+products.price}}</h4>
   <ng-template pTemplate="footer">
     <p-button  icon="pi pi-shopping-cart"></p-button>
-    <p-button label="View"  styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}">
+    <p-button label="View"  styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}" (click)="viewProduct(products)">
     </p-button>
   </ng-template>
 </p-card>

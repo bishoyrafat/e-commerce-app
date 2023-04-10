@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,11 +9,19 @@ import { MenuItem } from 'primeng/api';
 })
 export class NavBarComponent {
   items: MenuItem[] = [];
+  breadcrumbs$:any
+  constructor(private breadcrumbService: BreadcrumbService){}
   ngOnInit() {
+
+     this.breadcrumbService.breadcrumbs$.subscribe((data)=>{
+      this.breadcrumbs$ = data[data.length-1].label
+
+    })
+
     this.items = [
       {
         label: 'Home',
-        routerLink: '/home',
+        routerLink: '/',
         routerLinkActiveOptions: { exact: true },
       },
       {
@@ -31,4 +40,6 @@ export class NavBarComponent {
   isActiveChange(e: any) {
     console.log(e);
   }
+
+
 }

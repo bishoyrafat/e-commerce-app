@@ -19,8 +19,11 @@ export class ShopService {
   getFilyeredType(typeId: number) {
     return this.http.get(this.baseUrl + 'products?' + 'typeId=' + typeId);
   }
-  getFilteredSearch(text: string,pageIndex: any, pageSize: any) {
-    return this.http.get(this.baseUrl + `products?pageIndex=${pageIndex}&pageSize=${pageSize}&search=${text}` );
+  getFilteredSearch(text: string, pageIndex: any, pageSize: any) {
+    return this.http.get(
+      this.baseUrl +
+        `products?pageIndex=${pageIndex}&pageSize=${pageSize}&search=${text}`
+    );
   }
 
   getAllType() {
@@ -28,5 +31,9 @@ export class ShopService {
   }
   getAllBrands() {
     return this.http.get(this.baseUrl + 'Products/brands');
+  }
+
+  getProductsbyId(id: any) {
+    return this.http.get(this.baseUrl + 'Products/' + id);
   }
 }

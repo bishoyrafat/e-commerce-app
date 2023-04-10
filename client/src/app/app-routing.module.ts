@@ -5,13 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'shop',loadChildren : ()=>import('./shop/shop.module').then(mod =>mod.ShopModule)
+    path:'shop',loadChildren : ()=>import('./shop/shop.module').then(mod =>mod.ShopModule),data: { breadcrumb: 'shop' }
   },
   {
-    path:'home',loadChildren : ()=>import('./home/home.module').then(mod =>mod.HomeModule)
+    path:'',loadChildren : ()=>import('./home/home.module').then(mod =>mod.HomeModule),pathMatch:'full',data: { breadcrumb: 'home' }
   },
   {
-    path:'errors',component:TestErrorsComponent
+    path:'errors',component:TestErrorsComponent,
   }
 ];
 

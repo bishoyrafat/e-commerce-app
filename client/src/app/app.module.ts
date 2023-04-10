@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import {BreadcrumbModule} from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,9 +23,10 @@ import { ToastModule } from 'primeng/toast';
     HttpClientModule,
     ShopModule,
     ToastModule,
-        RouterModule
+    BreadcrumbModule
 
   ],
+  exports:[BreadcrumbModule],
   providers: [
     {
       provide:HTTP_INTERCEPTORS,useClass:HandleErrorsInterceptor,multi:true
